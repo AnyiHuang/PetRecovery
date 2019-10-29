@@ -6,7 +6,7 @@
     <string name="pet_location_label">Location</string>
     <string name="pet_detail_hint">Enter a detail for the pet</string>
     <string name="pet_details_label">Details</string>
-    <string name="pet_solved_label">Solved</string>
+    <string name="pet_found_label">Found</string>
     <string name="pet_Title">Pet Title</string>
     <string name="pet_Date">Pet Date</string>
 </resources>
