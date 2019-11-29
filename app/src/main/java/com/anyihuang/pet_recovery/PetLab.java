@@ -19,13 +19,17 @@ public class PetLab {
     }
     private PetLab(Context context) {
         mPets = new ArrayList<>();
-        for (int i = 0; i<10; i++){
-            Pet pet = new Pet();
-            pet.setName("Pet #" + i);
-            //pet.setSolved(i % 2 == 0);//Every other one
-            pet.setSolved(i % 1 == 0);//every one
-            mPets.add(pet);
-        }
+//        for (int i = 0; i<50; i++){
+//            Pet pet = new Pet();
+//            pet.setName("Pet #" + i);
+//            //pet.setSolved(i % 2 == 0);//Every other one
+//            pet.setSolved(i % 1 == 0);//every one
+//            mPets.add(pet);
+//        }
+    }
+
+    public void addPet(Pet p){
+        mPets.add(p);
     }
 
     public List<Pet> getPets(){
