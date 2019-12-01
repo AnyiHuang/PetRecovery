@@ -1,6 +1,14 @@
 package com.anyihuang.pet_recovery;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+import com.anyihuang.pet_recovery.database.PetBaseHelper;
+import com.anyihuang.pet_recovery.database.PetCursorWrapper;
+import com.anyihuang.pet_recovery.database.PetDbSchema;
+import com.anyihuang.pet_recovery.database.PetDbSchema.PetTable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +17,11 @@ import java.util.UUID;
 
 public class PetLab {
     private static PetLab sPetLab;
-    private List<Pet> mPets;
+    //private List<Pet> mPets;
+
+    //database creation
+    private Context mContext;
+    private SQLiteDatabase mDatabase;
 
     public static PetLab get(Context context){
         if (sPetLab == null){
@@ -18,30 +30,77 @@ public class PetLab {
         return sPetLab;
     }
     private PetLab(Context context) {
-        mPets = new ArrayList<>();
-//        for (int i = 0; i<50; i++){
-//            Pet pet = new Pet();
-//            pet.setName("Pet #" + i);
-//            //pet.setSolved(i % 2 == 0);//Every other one
-//            pet.setSolved(i % 1 == 0);//every one
-//            mPets.add(pet);
-//        }
+        mContext = context.getApplicationContext();
+        mDatabase = new PetBaseHelper(mContext).getWritableDatabase();
     }
 
     public void addPet(Pet p){
-        mPets.add(p);
+        ContentValues values = getContentValues(p);
+
+        mDatabase.insert(PetTable.NAME,null,values);
+
     }
 
     public List<Pet> getPets(){
-        return mPets;
+        //return new ArrayList<>();
+        List<Pet> crimes = new ArrayList<>();
+        PetCursorWrapper cursor = queryPets(null, null);
+        try {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                crimes.add(cursor.getPet());
+                cursor.moveToNext();
+            }
+        } finally {
+            cursor.close();
+        }
+        return crimes;
     }
 
     public Pet getPet(UUID id){
-        for(Pet pet : mPets){
-            if(pet.getId().equals(id)){
-                return pet;
+        PetCursorWrapper cursor = queryPets(
+                PetTable.Cols.UUID + " = ?",
+                new String[]{id.toString()}
+        );
+        try {
+            if (cursor.getCount() == 0) {
+                return null;
             }
+            cursor.moveToFirst();
+            return cursor.getPet();
+        } finally {
+            cursor.close();
         }
-        return null;
     }
+
+    public void updatePet(Pet pet){
+        String uuidString = pet.getId().toString();
+        ContentValues values = getContentValues(pet);
+        mDatabase.update(PetTable.NAME,values,
+                PetTable.Cols.UUID + " =?",
+                new String[]{uuidString});
+    }
+    private PetCursorWrapper queryPets(String whereClause, String[] whereArgs){
+        Cursor cursor = mDatabase.query(
+                PetTable.NAME,
+                null,//Columns - null selects all columns
+                whereClause,
+                whereArgs,
+                null,//groupBy
+                null,//having
+                null//orderBy
+        );
+        return new PetCursorWrapper(cursor);
+    }
+    private static ContentValues getContentValues(Pet pet){
+        ContentValues values = new ContentValues();
+        values.put(PetTable.Cols.UUID,pet.getId().toString());
+        values.put(PetTable.Cols.NAME,pet.getName());
+        values.put(PetTable.Cols.LOCATION,pet.getLocation());
+        values.put(PetTable.Cols.DETAIL,pet.getDetail());
+        values.put(PetTable.Cols.DATE,pet.getDate().toString());
+        values.put(PetTable.Cols.FOUND,pet.isFound() ? 1 : 0);
+        return values;
+    }
+
 }

@@ -113,6 +113,7 @@ public class PetListFragment extends Fragment{
             mAdapter = new PetAdapter(pets);
             mPetRecyclerView.setAdapter(mAdapter);
         }else{
+           mAdapter.setPets(pets);
             mAdapter.notifyDataSetChanged();
         }
         updateSubtitle();
@@ -137,10 +138,9 @@ public class PetListFragment extends Fragment{
         public void bind(Pet pet){
             mPet = pet;
             mNameTextView.setText(mPet.getName());
-            //
             mLocationTextView.setText(mPet.getLocation());
             mDateTextView.setText(mPet.getDate().toString());
-            mSolvedImageView.setVisibility(mPet.isSolved()?View.VISIBLE: View.GONE);
+            mSolvedImageView.setVisibility(mPet.isFound()?View.VISIBLE: View.GONE);
         }
         @Override
         public void onClick(View view){
@@ -172,6 +172,10 @@ public class PetListFragment extends Fragment{
         @Override
         public int getItemCount() {
             return mPets.size();
+        }
+
+        public void setPets(List<Pet> pets){
+            mPets = pets;
         }
     }
 

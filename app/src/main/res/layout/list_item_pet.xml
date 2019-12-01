@@ -13,27 +13,24 @@
         android:text="Pet_Name"
         android:textColor="@android:color/black"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@id/pet_location"
+        app:layout_constraintBottom_toTopOf="@+id/pet_location"
         app:layout_constraintEnd_toStartOf="@+id/pet_solved"
         app:layout_constraintHorizontal_bias="0.477"
-        app:layout_constraintStart_toEndOf="@+id/pet_pic"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/pet_location"
-        android:layout_width="114dp"
-        android:layout_height="23dp"
+        android:layout_width="263dp"
+        android:layout_height="22dp"
         android:text="Pet_Location"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/pet_pic"
-        app:layout_constraintLeft_toLeftOf="@id/pet_name"
-        app:layout_constraintRight_toRightOf="@id/pet_name"
-        app:layout_constraintEnd_toStartOf="@id/pet_solved"
-        app:layout_constraintTop_toBottomOf="@id/pet_name" />
-
+        app:layout_constraintStart_toEndOf="@id/pet_pic"
+        app:layout_constraintTop_toBottomOf="@id/pet_name"
+        app:layout_constraintBottom_toTopOf="@id/pet_date"
+        tools:layout_editor_absoluteY="31dp" />
 
     <TextView
         android:id="@+id/pet_date"
@@ -41,6 +38,7 @@
         android:layout_height="37dp"
         android:layout_marginEnd="108dp"
         android:text="pet_Date"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="@id/pet_solved"
         app:layout_constraintHorizontal_bias="0.0"

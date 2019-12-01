@@ -11,13 +11,16 @@ public class Pet {
     private Date mDate;
     private boolean mMale;
     private boolean mFemale;
-    private boolean mSolved;
+    private boolean mFound;
 
     public Pet(){
-        mId = UUID.randomUUID();
-        mDate = new Date();
+        this(UUID.randomUUID());
     }
 
+    public Pet(UUID id){
+        mId = id;
+        mDate = new Date();
+    }
     public UUID getId() {
         return mId;
     }
@@ -65,11 +68,11 @@ public class Pet {
     public void setFemale(boolean female) {
         mFemale = female;
     }
-    public boolean isSolved() {
-        return mSolved;
+    public boolean isFound() {
+        return mFound;
     }
 
-    public void setSolved(boolean solved) {
-        mSolved = solved;
+    public void setFound(boolean found) {
+        mFound = found;
     }
 }

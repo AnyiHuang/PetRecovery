@@ -25,7 +25,7 @@ public class PetFragment extends Fragment {
     private CheckBox mGenderMale;
     private CheckBox mGenderFemale;
     private Button mDateButton;
-    private CheckBox mSolvedCheckBox;
+    private CheckBox mFoundCheckBox;
 
     public static PetFragment newInstance(UUID petId) {
         Bundle args = new Bundle();
@@ -41,6 +41,13 @@ public class PetFragment extends Fragment {
         super.onCreate(savedInstanceState);
         UUID petId = (UUID) getArguments().getSerializable(ARG_PET_ID);
         mPet = PetLab.get(getActivity()).getPet(petId);
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+
+        PetLab.get(getActivity()).updatePet(mPet);
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -122,12 +129,12 @@ public class PetFragment extends Fragment {
         mDateButton.setText(mPet.getDate().toString());
         mDateButton.setEnabled(false);
 
-        mSolvedCheckBox = (CheckBox)v.findViewById(R.id.pet_solved);
-        mSolvedCheckBox.setChecked(mPet.isSolved());
-        mSolvedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        mFoundCheckBox = (CheckBox)v.findViewById(R.id.pet_found);
+        mFoundCheckBox.setChecked(mPet.isFound());
+        mFoundCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                mPet.setSolved(isChecked);
+                mPet.setFound(isChecked);
             }
         });
         return v;
