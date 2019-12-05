@@ -21,6 +21,8 @@ public class PetCursorWrapper extends CursorWrapper {
         Long date = getLong(getColumnIndex(PetTable.Cols.DATE));
         String detail = getString(getColumnIndex(PetTable.Cols.DETAIL));
         int isFound = getInt(getColumnIndex(PetTable.Cols.FOUND));
+        String photo = getString(getColumnIndex(PetTable.Cols.PHOTO));
+        int isMale = getInt(getColumnIndex(PetTable.Cols.MALE));
 
         Pet pet = new Pet(UUID.fromString(uuidString));
         pet.setName(name);
@@ -28,6 +30,8 @@ public class PetCursorWrapper extends CursorWrapper {
         pet.setDate(new Date(date));
         pet.setDetail(detail);
         pet.setFound(isFound!=0);
+        pet.setmPhoto(photo);
+        pet.setmMale(isMale);
 
         return pet;
     }

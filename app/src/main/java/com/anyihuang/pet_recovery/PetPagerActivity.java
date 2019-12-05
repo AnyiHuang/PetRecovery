@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -17,21 +16,21 @@ import java.util.UUID;
 public class PetPagerActivity extends AppCompatActivity {
     private static final String EXTRA_PET_ID = "com.anyihuang.pet_recovery.pet_id";
 
-    private ViewPager mViewPager;
     private List<Pet> mPets;
 
-    public static Intent newIntent(Context packageContext, UUID petId){
-        Intent intent = new Intent(packageContext,PetPagerActivity.class);
-        intent.putExtra(EXTRA_PET_ID,petId);
+    public static Intent newIntent(Context packageContext, UUID petId) {
+        Intent intent = new Intent(packageContext, PetPagerActivity.class);
+        intent.putExtra(EXTRA_PET_ID, petId);
         return intent;
     }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pet_pager);
         UUID petId = (UUID) getIntent().getSerializableExtra(EXTRA_PET_ID);
 
-        mViewPager = (ViewPager) findViewById(R.id.pet_view_pager);
+        ViewPager mViewPager = findViewById(R.id.pet_view_pager);
 
         mPets = PetLab.get(this).getPets();
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -48,11 +47,15 @@ public class PetPagerActivity extends AppCompatActivity {
             }
         });
 
-        for (int i = 0;i< mPets.size();i++){
-            if(mPets.get(i).getId().equals(petId)){
+        for (int i = 0; i < mPets.size(); i++) {
+            if (mPets.get(i).getId().equals(petId)) {
                 mViewPager.setCurrentItem(i);
                 break;
             }
         }
+    }
+
+    public void delectedPet() {
+        finish();
     }
 }

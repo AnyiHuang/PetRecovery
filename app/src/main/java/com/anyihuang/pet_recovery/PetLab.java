@@ -41,6 +41,19 @@ public class PetLab {
 
     }
 
+    public void delectPet(Pet pet) {
+        String uuidString = pet.getId().toString();
+        String[] args = {uuidString};
+        mDatabase.delete(PetTable.NAME, PetTable.Cols.UUID + "=?", args);
+    }
+
+    public void delectAllPet() {
+        List<Pet> pets = getPets();
+        for (Pet pet : pets) {
+            delectPet(pet);
+        }
+    }
+
     public List<Pet> getPets(){
         //return new ArrayList<>();
         List<Pet> crimes = new ArrayList<>();
@@ -100,6 +113,8 @@ public class PetLab {
         values.put(PetTable.Cols.DETAIL,pet.getDetail());
         values.put(PetTable.Cols.DATE,pet.getDate().toString());
         values.put(PetTable.Cols.FOUND,pet.isFound() ? 1 : 0);
+        values.put(PetTable.Cols.PHOTO, pet.getmPhoto());
+        values.put(PetTable.Cols.MALE, pet.getmMale());
         return values;
     }
 

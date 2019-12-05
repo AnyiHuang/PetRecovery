@@ -11,6 +11,8 @@ public class PetDbSchema {
             public static final String DETAIL = "detail";
             public static final String DATE = "date";
             public static final String FOUND = "found";
+            public static final String PHOTO = "photo";
+            public static final String MALE = "male";
         }
     }
 }

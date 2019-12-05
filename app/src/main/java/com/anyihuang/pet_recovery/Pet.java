@@ -9,18 +9,20 @@ public class Pet {
     private String mLocation;
     private String mDetail;
     private Date mDate;
-    private boolean mMale;
-    private boolean mFemale;
+    private int mMale;// 0:unknown 1:male 2:female
+    //private boolean mFemale;
     private boolean mFound;
+    private String mPhoto;
 
-    public Pet(){
+    public Pet() {
         this(UUID.randomUUID());
     }
 
-    public Pet(UUID id){
+    public Pet(UUID id) {
         mId = id;
         mDate = new Date();
     }
+
     public UUID getId() {
         return mId;
     }
@@ -40,6 +42,7 @@ public class Pet {
     public void setLocation(String location) {
         mLocation = location;
     }
+
     public String getDetail() {
         return mDetail;
     }
@@ -47,6 +50,7 @@ public class Pet {
     public void setDetail(String detail) {
         mDetail = detail;
     }
+
     public Date getDate() {
         return mDate;
     }
@@ -54,25 +58,28 @@ public class Pet {
     public void setDate(Date date) {
         mDate = date;
     }
-    public boolean isMale() {
+
+    public void setmMale(int mMale) {
+        this.mMale = mMale;
+    }
+
+    public int getmMale() {
         return mMale;
     }
 
-    public void setMale(boolean male) {
-        mMale = male;
-    }
-    public boolean isFemale() {
-        return mFemale;
-    }
-
-    public void setFemale(boolean female) {
-        mFemale = female;
-    }
     public boolean isFound() {
         return mFound;
     }
 
     public void setFound(boolean found) {
         mFound = found;
+    }
+
+    public void setmPhoto(String mPhoto) {
+        this.mPhoto = mPhoto;
+    }
+
+    public String getmPhoto() {
+        return mPhoto;
     }
 }
