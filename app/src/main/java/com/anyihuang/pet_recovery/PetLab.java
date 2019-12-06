@@ -10,9 +10,12 @@ import com.anyihuang.pet_recovery.database.PetCursorWrapper;
 import com.anyihuang.pet_recovery.database.PetDbSchema;
 import com.anyihuang.pet_recovery.database.PetDbSchema.PetTable;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+
 
 
 public class PetLab {
@@ -23,22 +26,21 @@ public class PetLab {
     private Context mContext;
     private SQLiteDatabase mDatabase;
 
-    public static PetLab get(Context context){
-        if (sPetLab == null){
+    public static PetLab get(Context context) {
+        if (sPetLab == null) {
             sPetLab = new PetLab(context);
         }
         return sPetLab;
     }
+
     private PetLab(Context context) {
         mContext = context.getApplicationContext();
         mDatabase = new PetBaseHelper(mContext).getWritableDatabase();
     }
 
-    public void addPet(Pet p){
+    public void addPet(Pet p) {
         ContentValues values = getContentValues(p);
-
-        mDatabase.insert(PetTable.NAME,null,values);
-
+        mDatabase.insert(PetTable.NAME, null, values);
     }
 
     public void delectPet(Pet pet) {
@@ -54,7 +56,7 @@ public class PetLab {
         }
     }
 
-    public List<Pet> getPets(){
+    public List<Pet> getPets() {
         //return new ArrayList<>();
         List<Pet> crimes = new ArrayList<>();
         PetCursorWrapper cursor = queryPets(null, null);
@@ -70,7 +72,7 @@ public class PetLab {
         return crimes;
     }
 
-    public Pet getPet(UUID id){
+    public Pet getPet(UUID id) {
         PetCursorWrapper cursor = queryPets(
                 PetTable.Cols.UUID + " = ?",
                 new String[]{id.toString()}
@@ -86,14 +88,15 @@ public class PetLab {
         }
     }
 
-    public void updatePet(Pet pet){
+    public void updatePet(Pet pet) {
         String uuidString = pet.getId().toString();
         ContentValues values = getContentValues(pet);
-        mDatabase.update(PetTable.NAME,values,
+        mDatabase.update(PetTable.NAME, values,
                 PetTable.Cols.UUID + " =?",
                 new String[]{uuidString});
     }
-    private PetCursorWrapper queryPets(String whereClause, String[] whereArgs){
+
+    private PetCursorWrapper queryPets(String whereClause, String[] whereArgs) {
         Cursor cursor = mDatabase.query(
                 PetTable.NAME,
                 null,//Columns - null selects all columns
@@ -105,17 +108,19 @@ public class PetLab {
         );
         return new PetCursorWrapper(cursor);
     }
-    private static ContentValues getContentValues(Pet pet){
+
+    private static ContentValues getContentValues(Pet pet) {
         ContentValues values = new ContentValues();
-        values.put(PetTable.Cols.UUID,pet.getId().toString());
-        values.put(PetTable.Cols.NAME,pet.getName());
-        values.put(PetTable.Cols.LOCATION,pet.getLocation());
-        values.put(PetTable.Cols.DETAIL,pet.getDetail());
-        values.put(PetTable.Cols.DATE,pet.getDate().toString());
-        values.put(PetTable.Cols.FOUND,pet.isFound() ? 1 : 0);
+        values.put(PetTable.Cols.UUID, pet.getId().toString());
+        values.put(PetTable.Cols.NAME, pet.getName());
+        values.put(PetTable.Cols.LOCATION, pet.getLocation());
+        values.put(PetTable.Cols.DETAIL, pet.getDetail());
+        values.put(PetTable.Cols.DATE, pet.getDate());
+        values.put(PetTable.Cols.FOUND, pet.isFound() ? 1 : 0);
         values.put(PetTable.Cols.PHOTO, pet.getmPhoto());
         values.put(PetTable.Cols.MALE, pet.getmMale());
         return values;
     }
+
 
 }

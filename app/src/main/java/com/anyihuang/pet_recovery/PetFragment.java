@@ -28,6 +28,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import java.io.File;
+import java.util.Date;
 import java.util.UUID;
 
 public class PetFragment extends Fragment {
@@ -193,12 +194,6 @@ public class PetFragment extends Fragment {
                 mGenderFemale.setChecked(!mGenderMale.isChecked());
             }
         });
-       /* mGenderMale.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                mPet.setMale(isChecked);
-            }
-        });*/
 
         mGenderFemale = v.findViewById(R.id.pet_gender_female);
         mGenderFemale.setChecked(mPet.getmMale() == 2);
@@ -209,14 +204,9 @@ public class PetFragment extends Fragment {
                 mGenderMale.setChecked(!mGenderFemale.isChecked());
             }
         });
-      /*  mGenderFemale.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                mPet.setMale(!isChecked);
-            }
-        });*/
+
         Button mDateButton = v.findViewById(R.id.pet_date);
-        mDateButton.setText(mPet.getDate().toString());
+        mDateButton.setText(new Date(mPet.getDate()).toString());
         mDateButton.setEnabled(false);
 
         mFoundCheckBox = v.findViewById(R.id.pet_found);
@@ -260,9 +250,4 @@ public class PetFragment extends Fragment {
             activity.delectedPet();
     }
 
-    /*private class PetHolder extends RecyclerView.ViewHolder {
-        public PetHolder(LayoutInflater inflater, ViewGroup parent) {
-            super(inflater.inflate(R.layout.list_item_pet, parent, false));
-        }
-    }*/
 }

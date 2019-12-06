@@ -1,10 +1,13 @@
 package com.anyihuang.pet_recovery;
+
 import android.Manifest;
 import android.os.Bundle;
 
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-public class PetListActivity extends SingleFragmentActivity{
+
+public class PetListActivity extends SingleFragmentActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -12,9 +15,8 @@ public class PetListActivity extends SingleFragmentActivity{
                 Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
     }
 
-
     @Override
-    protected Fragment createFragment(){
+    protected Fragment createFragment() {
         return new PetListFragment();
     }
 }

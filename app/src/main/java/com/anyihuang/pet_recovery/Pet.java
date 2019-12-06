@@ -8,7 +8,7 @@ public class Pet {
     private String mName;
     private String mLocation;
     private String mDetail;
-    private Date mDate;
+    private long mDate;
     private int mMale;// 0:unknown 1:male 2:female
     //private boolean mFemale;
     private boolean mFound;
@@ -20,7 +20,7 @@ public class Pet {
 
     public Pet(UUID id) {
         mId = id;
-        mDate = new Date();
+        mDate = System.currentTimeMillis();
     }
 
     public UUID getId() {
@@ -51,11 +51,11 @@ public class Pet {
         mDetail = detail;
     }
 
-    public Date getDate() {
+    public long getDate() {
         return mDate;
     }
 
-    public void setDate(Date date) {
+    public void setDate(long date) {
         mDate = date;
     }
 

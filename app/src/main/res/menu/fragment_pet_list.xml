@@ -13,6 +13,6 @@
     <item
         android:id="@+id/remove_pet"
         android:icon="@drawable/ic_menu_remove"
-        android:title="string/remove_pet"
+        android:title="@string/remove_pets"
         app:showAsAction="ifRoom|withText"/>
 </menu>

@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.File;
+import java.util.Date;
 import java.util.List;
 
 
@@ -95,6 +96,7 @@ public class PetListFragment extends Fragment {
                 return true;
             case R.id.remove_pet:
                 showDialog();
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -169,7 +171,7 @@ public class PetListFragment extends Fragment {
             mPet = pet;
             mNameTextView.setText(mPet.getName());
             mLocationTextView.setText(mPet.getLocation());
-            mDateTextView.setText(mPet.getDate().toString());
+            mDateTextView.setText(new Date(mPet.getDate()).toString());
             mSolvedImageView.setVisibility(mPet.isFound() ? View.VISIBLE : View.GONE);
             String photo = mPet.getmPhoto();
             if (!TextUtils.isEmpty(photo)) {

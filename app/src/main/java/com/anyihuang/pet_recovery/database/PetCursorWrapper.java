@@ -10,15 +10,15 @@ import java.util.Date;
 import java.util.UUID;
 
 public class PetCursorWrapper extends CursorWrapper {
-    public PetCursorWrapper(Cursor cursor){
+    public PetCursorWrapper(Cursor cursor) {
         super(cursor);
     }
 
-    public Pet getPet(){
+    public Pet getPet() {
         String uuidString = getString(getColumnIndex(PetTable.Cols.UUID));
         String name = getString(getColumnIndex(PetTable.Cols.NAME));
         String location = getString(getColumnIndex(PetTable.Cols.LOCATION));
-        Long date = getLong(getColumnIndex(PetTable.Cols.DATE));
+        long date = getLong(getColumnIndex(PetTable.Cols.DATE));
         String detail = getString(getColumnIndex(PetTable.Cols.DETAIL));
         int isFound = getInt(getColumnIndex(PetTable.Cols.FOUND));
         String photo = getString(getColumnIndex(PetTable.Cols.PHOTO));
@@ -27,9 +27,9 @@ public class PetCursorWrapper extends CursorWrapper {
         Pet pet = new Pet(UUID.fromString(uuidString));
         pet.setName(name);
         pet.setLocation(location);
-        pet.setDate(new Date(date));
+        pet.setDate(date);
         pet.setDetail(detail);
-        pet.setFound(isFound!=0);
+        pet.setFound(isFound != 0);
         pet.setmPhoto(photo);
         pet.setmMale(isMale);
 
