@@ -10,7 +10,6 @@ public class Pet {
     private String mDetail;
     private long mDate;
     private int mMale;// 0:unknown 1:male 2:female
-    //private boolean mFemale;
     private boolean mFound;
     private String mPhoto;
 

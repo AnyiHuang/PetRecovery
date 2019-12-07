@@ -23,7 +23,7 @@ public class PetBaseHelper extends SQLiteOpenHelper {
                 PetTable.Cols.LOCATION + ", " +
                 PetTable.Cols.DETAIL + ", " +
                 PetTable.Cols.DATE + ", " +
-                PetTable.Cols.FOUND +
+                PetTable.Cols.FOUND + ", " +
                 PetTable.Cols.PHOTO +", " +
                 PetTable.Cols.MALE +
                 ")"

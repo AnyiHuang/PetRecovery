@@ -2,6 +2,7 @@
     <string name="app_name">Pet Recovery</string>
     <string name="pet_name_hint">Enter a name for the pet</string>
     <string name="pet_name_label">Name</string>
+    <string name="pet_photo_label">Photo</string>
     <string name="pet_location_hint">Enter a location for the pet</string>
     <string name="pet_location_label">Location</string>
     <string name="pet_detail_hint">Enter a detail for the pet</string>

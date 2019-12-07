@@ -204,7 +204,6 @@ public class PetFragment extends Fragment {
                 mGenderMale.setChecked(!mGenderFemale.isChecked());
             }
         });
-
         Button mDateButton = v.findViewById(R.id.pet_date);
         mDateButton.setText(new Date(mPet.getDate()).toString());
         mDateButton.setEnabled(false);
